@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Security;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
@@ -19,9 +19,7 @@ use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 class RegistrationController extends AbstractController
 {
-    public function __construct(private EmailVerifier $emailVerifier)
-    {
-    }
+    public function __construct(private EmailVerifier $emailVerifier) {}
 
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
@@ -44,21 +42,29 @@ class RegistrationController extends AbstractController
 
             // generate a signed url and email it to the user
 
-            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
+            $this->emailVerifier->sendEmailConfirmation(
+                'app_verify_email',
+                $user,
                 (new TemplatedEmail())
                     ->from(new Address('user@email.com', 'Utilisateur'))
                     ->to($user->getEmail())
                     ->subject('Please Confirm your Email')
-                    ->htmlTemplate('registration/confirmation_email.html.twig')
+                    ->htmlTemplate('secure/registration/confirmation_email.html.twig')
 
-        );
+            );
+            $form=$this->createForm(RegistrationFormType::class , $user);
+            $this->addFlash('primary', 'Un email de confirmation viens de vous etre envoyé ');
+            return $this->redirectToRoute('app_register');
+
+            // return $this->redirectToRoute('app_home_index');
 
             // do anything else you need here, like send an email
-            dd('email de comfirmation envoyé');
+
+            // dd('email de comfirmation envoyé');
 
         }
 
-        return $this->render('registration/register.html.twig', [
+        return $this->render('secure/registration/register.html.twig', [
             'registrationForm' => $form,
         ]);
     }
@@ -88,8 +94,8 @@ class RegistrationController extends AbstractController
         }
 
         // @TODO Change the redirect on success and handle or remove the flash message in your templates
-        $this->addFlash('success', 'Your email address has been verified.');
+        $this->addFlash('success', 'Ton adresse email a bien été confirmé ! .');
 
-        return $this->redirectToRoute('app_home_access');
+        return $this->redirectToRoute('app_login');
     }
 }

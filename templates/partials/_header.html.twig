@@ -1,0 +1,142 @@
+{# {% block header %} #}
+{# <header>
+					<div class="logo-burger">
+						<a href="product/index.html.twig">
+							<img id="logo" src={{asset("assets/img/future.jpg")}} alt="logo"/>
+						</a>
+						<img class="burger" id="burger" src={{asset("assets/img/burger-bar.png")}} alt="">
+					</div>
+					<div></div>
+			
+			
+					<nav id="navigation" class="navigation">
+						<div class="nav-left">
+			
+							<div class="transport" id="transport">
+								<span class="transporteur">Transporteur
+								</span>
+								<div class="submenu" id="submenu-transporteur">
+									<a href="">Annonces</a><br>
+									<a href="">Comment ça marche ?</a><br>
+									<a href="">Devenir Partenaire</a>
+								</div>
+							</div>
+			
+							<div id="particulier" class="particulier">
+								<span class="particulier">Particulier</span>
+								<div class="submenu" id="submenu-particulier">
+									<a href="">Deposez votre annonce</a><br>
+									<a href="">Vos annonces</a><br>
+									<a href="">Comment ca marche ?</a>
+								</div>
+							</div>
+						</div>
+						<div class="nav-right">
+							<a class="annonce">Annonces</a>
+			
+							<div id="mon-compte" class="mon-compte">
+								<span class="mon-compte">Mon compte</span>
+								<div class="submenu" id="submenu-mon-compte">
+									<a href="">Connexion</a><br>
+									<a href="">Inscription</a><br>
+									<a href="">Devenir Partenaire</a>
+								</div>
+			
+							</div>
+						</div>
+					</nav>
+				</header> #}
+{# {% endblock %} #}
+	{% block header %}
+		<nav class="navbar navbar-expand-lg bg-body-tertiary"> 
+		<div class="container-fluid ">
+			<a class="navbar-brand" href={{path('app_home_index')}}>
+				<img id="logo" src={{asset("assets/img/future.jpg")}} alt="logo"/>
+			</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse container" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-between">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							Transporteur
+						</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a class="dropdown-item" href={{path('app_annonce_index')}}>Annonces</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href={{path('app_home_ccm')}}>Comment ca marche ?</a>
+							</li>
+							<li><hr class="dropdown-divider"></li>
+							<li>
+								<a class="dropdown-item" href={{path('app_home_dpt')}}>Devenir partenaire</a>
+							</li>
+						</ul>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							Particulier
+						</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a class="dropdown-item" href={{path('app_annonce_new')}}>Déposer votre annonce</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href={{path('app_annonce_index')}}>Vos annonces</a>
+							</li>
+							<li><hr class="dropdown-divider"></li>
+							<li>
+								<a class="dropdown-item" href={{path('app_home_ccm')}}>Comment ça marche ?</a>
+							</li>
+						</ul>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							Annonces
+						</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a class="dropdown-item" href={{path('app_annonce_new')}}>Deposez une annonce</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href={{path('app_annonce_index')}}>Voir les annonces</a>
+							</li>
+							<li><hr class="dropdown-divider"></li>
+							<li>
+								<a class="dropdown-item" href={{path('app_home_ccm')}}>Comment ça marche ?</a>
+							</li>
+						</ul>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							Mon compte
+						</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a class="dropdown-item" href={{path('app_login')}}>Connexion</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href={{path('app_register')}}>Inscription</a>
+							</li>
+							<li><hr class="dropdown-divider"></li>
+							<li>
+								<a class="dropdown-item" href="#">Mon profil</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href={{path('app_home_support')}}>Contactez-Nous</a>
+							</li>
+						</li>
+					</li>
+				</ul>
+			</li>
+		</ul>
+		{# <form class="d-flex" role="search">
+									        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+									        <button class="btn btn-outline-success" type="submit">Search</button>
+									      </form> #}
+	</div>
+</div>
+</nav>
+{% endblock %}

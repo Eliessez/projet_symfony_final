@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+{{parent()}}
+Support
+{% endblock %}
+
+{% block body %}
+<h1>Support , contactez nous </h1>
+
+{% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {{ form_start(form) }}
+        {{ form_row(form.name) }}
+        {{ form_row(form.firstName) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.objet) }}
+        {{ form_row(form.message) }}
+
+        <button type="submit" class="btn btn-primary">Envoyer</button>
+    {{ form_end(form) }}
+{% endblock %} 

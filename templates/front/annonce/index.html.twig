@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annonce index{% endblock %}
+
+{% block body %}
+    <h1>Annonce index</h1>
+
+        <tbody>
+        {% for annonce in annonces %}
+        <div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="..." class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{annonce.titre}}</h5>
+        <p class="card-text">{{annonce.description}}</p>
+        <p class="card-text"><small class="text-body-secondary">{{annonce.dateReception ? annonce.dateReception|date('d-m-Y') :' '}} - {{annonce.dateLivraison ? annonce.dateLivraison|date('d-m-Y') :' '}}</small></p>
+        <p class="card-text"><small class="text-body-secondary">{{annonce.adresseReception ? annonce.adresseReception|date('d-m-Y') : ' '}} - {{annonce.adresseLivraison ? annonce.adresseLivraison|date('d-m-Y') :' '}}</small></p>
+        <a href="{{ path('app_annonce_show', {'id': annonce.id}) }}">Voir</a>
+        <a href="{{ path('app_annonce_edit', {'id': annonce.id}) }}">Modifier</a>
+      </div>
+    </div>
+  </div>
+</div>
+        {% else %}
+            <tr>
+                <td colspan="12">Pas d'annonce disponible</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    <a href="{{ path('app_annonce_new') }}">Create new</a>
+{% endblock %}
