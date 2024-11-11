@@ -5,6 +5,7 @@ namespace App\Factory;
 use App\Entity\Produit;
 use App\Enum\ObjetTaille;
 use App\Enum\ObjetType;
+use Doctrine\Common\Collections\Expr\Value;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
 use function Zenstruck\Foundry\set;
@@ -40,8 +41,8 @@ final class ProduitFactory extends PersistentProxyObjectFactory
             'description' => self::faker('fr_FR')->sentence(),
             'nom' => self::faker('fr_FR')->text(100),
             'poid_objet' => self::faker()->randomFloat(1,1,500),
-            'taille_objet' => self::faker()->randomElements(ObjetTaille::class),
-            'type_objet' => self::faker()->randomElements(ObjetType::class),
+            'taille_objet' => self::faker()->randomElement(ObjetTaille::cases())->value,
+            'type_objet' => self::faker()->randomElement(ObjetType::cases())->value,
 
         ];
     }

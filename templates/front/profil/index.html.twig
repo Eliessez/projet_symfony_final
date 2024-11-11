@@ -1,11 +1,94 @@
 {% extends 'base.html.twig' %}
-{% block title %}
-{{parent()}}
-Profil
-{% endblock %}
 
-{% block title %}Mon profil{% endblock %}
+{% block title %}
+	{{ parent() }}
+	- Mon profil
+{% endblock %}
 
 {% block body %}
+	<h1>Mon profil</h1>
 
-{% endblock %}
+	<table>
+		<tr>
+			<th>Email</th>
+			<td>{{ user.email }}</td>
+			<th>Nom</th>
+			<td>{{ user.name }}</td>
+			<th>Prénom</th>
+			<td>{{ user.firstName }}</td>
+			<th>Adresse</th>
+			<td>{{ user.adress }}</td>
+			<th>Numéro de SIRET</th>
+			<td>{{ user.siretNumber }}</td>
+			<th>RCS</th>
+			<td>{{ user.rcs }}</td>
+			<th>KBIS</th>
+			<td>{{ user.kbis }}</td>
+			<th>Siège social</th>
+			<td>{{ user.headOffice }}</td>
+		</tr>
+	</table>
+
+	{% if annonces is empty %}
+		<p>Aucune annonce</p>
+	{% else %}
+		{% for annonce in annonces %}
+			<div class="card mb-3" style="max-width: 540px;">
+				<div class="row g-0">
+					<div class="col-md-4">
+						<img src="{{ annonce.image ? asset('uploads/images/' ~ annonce.image) : asset('images/placeholder.jpg') }}" class="img-fluid rounded-start" alt="{{ annonce.titre }}">
+					</div>
+					<div class="col-md-8">
+						<div class="card-body">
+							<h5 class="card-title">{{ annonce.titre }}</h5>
+							<p class="card-text">{{ annonce.description }}</p>
+							<p class="card-text">
+								<small class="text-body-secondary">
+									Réception :
+									{{ annonce.dateReception ? annonce.dateReception|date('d-m-Y') : 'Non spécifiée' }}
+									- 
+																		Livraison :
+									{{ annonce.dateLivraison ? annonce.dateLivraison|date('d-m-Y') : 'Non spécifiée' }}
+								</small>
+							</p>
+							<p class="card-text">
+								<small class="text-body-secondary">
+									De :
+									{{ annonce.adresseReception }}
+									-
+																		 À :
+									{{ annonce.adresseLivraison }}
+								</small>
+							</p>
+							<a href="{{ path('app_annonce_show', {'id': annonce.id}) }}" class="btn btn-primary btn-sm">Voir</a>
+							<a href="{{ path('app_annonce_edit', {'id': annonce.id}) }}" class="btn btn-secondary btn-sm">Modifier</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+        {% endif %}
+	{% endblock %}
+	
+    
+    
+    
+    
+    
+    
+    
+    
+    {# <tr>
+		<td>{{ annonce.numeroAnnonce }}</td>
+		<td>{{ annonce.prix }}</td>
+		<td>{{ annonce.adresseReception }}</td>
+		<td>{{ annonce.dateReception ? annonce.dateReception|date('Y-m-d') : '' }}</td>
+		<td>{{ annonce.adresseLivraison }}</td>
+		<td>{{ annonce.dateLivraison ? annonce.dateLivraison|date('Y-m-d') : '' }}</td>
+		<td>{{ annonce.image }}</td>
+		<td>{{ annonce.etatCommande.value }}</td>
+		<td>{{ annonce.dateValidation ? annonce.dateValidation|date('Y-m-d') : '' }}</td>
+		<td>{{ annonce.createdAt ? annonce.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+		<td>{{ annonce.description }}</td>
+		<td>{{ annonce.titre }}</td>
+	</tr> #}

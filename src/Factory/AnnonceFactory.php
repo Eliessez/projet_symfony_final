@@ -16,9 +16,7 @@ final class AnnonceFactory extends PersistentProxyObjectFactory
      *
      * @todo inject services if required
      */
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     public static function class(): string
     {
@@ -34,16 +32,16 @@ final class AnnonceFactory extends PersistentProxyObjectFactory
     {
         return [
             'titre' => self::faker('fr_FR')->word(),
-            'description'=> self::faker('fr_FR')->sentence(), 
+            'description' => self::faker('fr_FR')->sentence(),
             'adresse_livraison' => self::faker('fr_FR')->address(),
             'adresse_reception' => self::faker('fr_FR')->address(),
             'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime('-1 week')),
             'date_livraison' => self::faker()->dateTimeBetween('-1 week', '+1 week'),
             'date_reception' => self::faker()->dateTimeBetween('-1 week', '+1 week'),
             'date_validation' => self::faker()->dateTimeBetween('-1 week', '+1 week'),
-            'etat_commande' => self::faker()->randomElement(AnnonceStatut::cases()),
-            'numero_annonce' => 'CMD - ' . self::faker()->randomNumber(7,true),
-            'prix' => self::faker()->randomFloat(1,1,500),
+            'etat_commande' => [self::faker()->randomElement(AnnonceStatut::cases())->value],
+            'numero_annonce' => 'CMD - ' . self::faker()->randomNumber(7, true),
+            'prix' => self::faker()->randomFloat(1, 1, 500),
             'user' => UserFactory::new(),
         ];
     }

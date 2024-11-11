@@ -38,7 +38,7 @@ final class UserFactory extends PersistentProxyObjectFactory
             'first_name' => self::faker('fr_FR')->firstName(),
             'name' => self::faker('fr_FR')->lastName(),
             'password' => self::faker()->password(),
-            'roles' => self::faker()->randomElements(UserRole::class),
+            'roles' => [self::faker()->randomElement(UserRole::cases())->value],
 
         ];
     }

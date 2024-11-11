@@ -9,10 +9,12 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
-
+use App\Entity\User;
+use Symfony\Component\HttpFoundation\File\File;
 
 #[ORM\Entity(repositoryClass: AnnonceRepository::class)]
 #[Vich\Uploadable]
+#[ORM\HasLifecycleCallbacks]
 class Annonce
 {
     #[ORM\Id]
@@ -20,8 +22,8 @@ class Annonce
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $numero_annonce = null;
+    #[ORM\Column(type: 'string', length: 13, unique: true)]
+    private ?string $numeroAnnonce = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     private ?string $prix = null;
@@ -41,7 +43,10 @@ class Annonce
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
-    #[ORM\Column(enumType: AnnonceStatut::class)]
+    #[Vich\UploadableField(mapping:'annonces',fileNameProperty:'image')]
+    private ?File $imageFile = null;
+
+    #[ORM\Column(type: 'string', enumType: AnnonceStatut::class)]
     private ?AnnonceStatut $etat_commande = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
@@ -52,7 +57,7 @@ class Annonce
 
     #[ORM\ManyToOne(inversedBy: 'annonces')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $User = null;
+    private ?User $user = null;
 
     /**
      * @var Collection<int, Produit>
@@ -85,12 +90,12 @@ class Annonce
 
     public function getNumeroAnnonce(): ?string
     {
-        return $this->numero_annonce;
+        return $this->numeroAnnonce;
     }
 
     public function setNumeroAnnonce(string $numero_annonce): static
     {
-        $this->numero_annonce = $numero_annonce;
+        $this->numeroAnnonce = $numero_annonce;
 
         return $this;
     }
@@ -205,12 +210,12 @@ class Annonce
 
     public function getUser(): ?User
     {
-        return $this->User;
+        return $this->user;
     }
 
-    public function setUser(?User $User): static
+    public function setUser(?User $user): static
     {
-        $this->User = $User;
+        $this->user = $user;
 
         return $this;
     }
@@ -289,6 +294,26 @@ class Annonce
     public function setDescription(string $description): static
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of imageFile
+     */ 
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * Set the value of imageFile
+     *
+     * @return  self
+     */ 
+    public function setImageFile($imageFile)
+    {
+        $this->imageFile = $imageFile;
 
         return $this;
     }
