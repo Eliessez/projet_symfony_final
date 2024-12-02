@@ -81,6 +81,7 @@ class Annonce
     {
         $this->produit = new ArrayCollection();
         $this->transporteur = new ArrayCollection();
+        $this->etat_commande = AnnonceStatut::PENDING;
     }
 
     public function getId(): ?int
@@ -316,5 +317,10 @@ class Annonce
         $this->imageFile = $imageFile;
 
         return $this;
+    }
+    public function close (array $ts){
+        if ($ts === null ) {
+            # code...
+        }
     }
 }

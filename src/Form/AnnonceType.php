@@ -8,6 +8,7 @@ use App\Enum\AnnonceStatut;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
@@ -43,14 +44,14 @@ class AnnonceType extends AbstractType
         ->add('adresse_reception', TextType::class, [
             'constraints' => [new Assert\NotBlank()]
         ])
-        ->add('date_reception', DateTimeType::class, [
+        ->add('date_reception', DateType::class, [
             'widget' => 'single_text',
             'constraints' => [new Assert\NotBlank()]
         ])
         ->add('adresse_livraison', TextType::class, [
             'constraints' => [new Assert\NotBlank()]
         ])
-        ->add('date_livraison', DateTimeType::class, [
+        ->add('date_livraison', DateType::class, [
             'widget' => 'single_text',
             'constraints' => [new Assert\NotBlank()]
         ])
@@ -66,25 +67,25 @@ class AnnonceType extends AbstractType
                 ])
             ]
         ])
-        ->add('etat_commande', EnumType::class, [
-            'class' => AnnonceStatut::class,
-            'constraints' => [new Assert\NotBlank()]
-        ])
-        ->add('date_validation', DateTimeType::class, [
-            'widget' => 'single_text',
-            'required' => false
-        ])
-        ->add('User', EntityType::class, [
-            'class' => User::class,
-            'choice_label' => 'email',
-            'constraints' => [new Assert\NotBlank()]
-        ])
-        ->add('transporteur', EntityType::class, [
-            'class' => User::class,
-            'choice_label' => 'email',
-            'multiple' => true,
-            'required' => false
-        ])
+        // ->add('etat_commande', EnumType::class, [
+        //     'class' => AnnonceStatut::class,
+        //     'constraints' => [new Assert\NotBlank()]
+        // ])
+        // ->add('date_validation', DateTimeType::class, [
+        //     'widget' => 'single_text',
+        //     'required' => false
+        // ])
+        // ->add('User', EntityType::class, [
+        //     'class' => User::class,
+        //     'choice_label' => 'email',
+        //     'constraints' => [new Assert\NotBlank()]
+        // ])
+        // ->add('transporteur', EntityType::class, [
+        //     'class' => User::class,
+        //     'choice_label' => 'email',
+        //     'multiple' => true,
+        //     'required' => false
+        // ])
     ;
 }
 

@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/annonce',name:'app_annonce_')]
 class AnnonceController extends AbstractController
@@ -23,6 +24,7 @@ class AnnonceController extends AbstractController
     }
 
     #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
+    // #[IsGranted("ROLE_USER")]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $annonce = new Annonce();
@@ -52,6 +54,8 @@ class AnnonceController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
+    #[IsGranted("ROLE_USER")]
+
     public function edit(Request $request, Annonce $annonce, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(AnnonceType::class, $annonce);
@@ -72,6 +76,8 @@ class AnnonceController extends AbstractController
     }
 
     #[Route('/{id}', name: 'delete', methods: ['POST'])]
+    // #[IsGranted("ROLE_USER")]
+
     public function delete(Request $request, Annonce $annonce, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$annonce->getId(), $request->getPayload()->getString('_token'))) {

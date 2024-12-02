@@ -1,0 +1,43 @@
+{% block footer %}
+<footer class="bg-primary text-light py-4 mt-5 w-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-3 mb-md-0">
+                <h5>À propos de nous</h5>
+                <p>Votre entreprise est dédiée à fournir des produits/services de qualité à nos clients depuis [année]. Notre mission est de [votre mission].</p>
+            </div>
+            <div class="col-md-4 mb-3 mb-md-0">
+                <h5>Liens rapides</h5>
+                <ul class="list-unstyled">
+                    <li><a href="{{ path('app_home_index') }}" class="text-light">Accueil</a></li>
+                    <li><a href="{{ path('app_annonce_index') }}" class="text-light">Annonces</a></li>
+                    <li><a href="{{ path('app_home_ccm') }}" class="text-light">Comment ça marche </a></li>
+                    <li><a href="{{ path('app_home_dpt') }}" class="text-light">Devenir Partenaire</a></li>
+                 </ul>
+            </div>
+            <div class="col-md-4">
+                <h5><a href="{{path('app_home_support')}}">Contactez-Nous</a></h5>
+                <address>
+                    <strong>Nom de l'entreprise</strong><br>
+                    123 Rue Example<br>
+                    75000 Paris, France<br>
+                    <abbr title="Téléphone">Tél:</abbr> (123) 456-7890
+                </address>
+                <a href="mailto:info@example.com" class="text-light">info@example.com</a>
+            </div>
+        </div>
+        <hr class="bg-light">
+        <div class="row">
+            <div class="col-md-6">
+                <p>&copy; {{ "now"|date("Y") }} Votre Entreprise. Tous droits réservés.</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <a href="#" class="text-light me-2"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-light me-2"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-light me-2"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-light"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+{% endblock %}

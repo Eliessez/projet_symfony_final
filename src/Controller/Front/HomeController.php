@@ -2,7 +2,9 @@
 
 namespace App\Controller\Front;
 
+use App\Entity\Annonce;
 use App\Form\SupportType;
+use App\Repository\AnnonceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,9 +14,9 @@ use Symfony\Component\Routing\Attribute\Route;
 class HomeController extends AbstractController
 {
     #[Route('', name: 'index')]
-    public function index(): Response
+    public function index(AnnonceRepository $annonceRepository): Response
     {
-        return $this->render('front/home/index.html.twig');
+        return $this->render('front/home/index.html.twig',['annonces'=>$annonceRepository->findAll()]);
     }
 
     #[Route('comment-ca-marche', name:'ccm')]

@@ -36,7 +36,7 @@
 			<div class="card mb-3" style="max-width: 540px;">
 				<div class="row g-0">
 					<div class="col-md-4">
-						<img src="{{ annonce.image ? asset('uploads/images/' ~ annonce.image) : asset('images/placeholder.jpg') }}" class="img-fluid rounded-start" alt="{{ annonce.titre }}">
+						<img src="{{ vich_uploader_asset(annonce , 'imageFile') }}" class="img-fluid rounded-start" alt="{{ annonce.titre }}">
 					</div>
 					<div class="col-md-8">
 						<div class="card-body">
@@ -47,7 +47,7 @@
 									Réception :
 									{{ annonce.dateReception ? annonce.dateReception|date('d-m-Y') : 'Non spécifiée' }}
 									- 
-																		Livraison :
+																											Livraison :
 									{{ annonce.dateLivraison ? annonce.dateLivraison|date('d-m-Y') : 'Non spécifiée' }}
 								</small>
 							</p>
@@ -56,7 +56,7 @@
 									De :
 									{{ annonce.adresseReception }}
 									-
-																		 À :
+																											 À :
 									{{ annonce.adresseLivraison }}
 								</small>
 							</p>
@@ -67,18 +67,11 @@
 				</div>
 			</div>
 		{% endfor %}
-        {% endif %}
-	{% endblock %}
-	
-    
-    
-    
-    
-    
-    
-    
-    
-    {# <tr>
+	{% endif %}
+{% endblock %}
+
+
+{# <tr>
 		<td>{{ annonce.numeroAnnonce }}</td>
 		<td>{{ annonce.prix }}</td>
 		<td>{{ annonce.adresseReception }}</td>

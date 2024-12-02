@@ -4,6 +4,8 @@ namespace App\Enum;
 
 enum AnnonceStatut: string
 {
+    case AVAILABLE = 'disponible';
+    case SUPPORTED = 'Pris en charge';
     case PENDING = 'en attente';
     case PAYMENT_PENDING = 'paiement en attente';
     case PAID = 'payé';
