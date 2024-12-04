@@ -60,8 +60,8 @@
 									{{ annonce.adresseLivraison }}
 								</small>
 							</p>
-							<a href="{{ path('app_annonce_show', {'id': annonce.id}) }}" class="btn btn-primary btn-sm">Voir</a>
-							<a href="{{ path('app_annonce_edit', {'id': annonce.id}) }}" class="btn btn-secondary btn-sm">Modifier</a>
+							<a href="{{ path('app_annonce_show', {'slug': annonce.slug}) }}" class="btn btn-primary btn-sm">Voir</a>
+							<a href="{{ path('app_annonce_edit', {'slug': annonce.slug}) }}" class="btn btn-secondary btn-sm">Modifier</a>
 						</div>
 					</div>
 				</div>

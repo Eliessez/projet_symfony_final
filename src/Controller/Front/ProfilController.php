@@ -19,7 +19,7 @@ class ProfilController extends AbstractController
     public function index(UserRepository $userRepository , AnnonceRepository $annonceRepository , Security $security ): Response
     {
         $user = $security->getUser();
-   
+
         if (!$user) {
             throw new AccessDeniedException('Vous devez être connecté pour accéder à cette page.');
         }

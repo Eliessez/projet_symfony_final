@@ -29,8 +29,8 @@
 				<article>
 					<h1>C'est si simple
 					</h1>
-					<h2 class="text-center ">Expédiez vos colis dans toute la France .</h2>
-					<h2 class="text-center ">La solution pour vos envoi en toute sérénité</h2>
+					<h3 class="text-center">Expédiez vos colis dans toute la France .</h3>
+					<h3 class="text-center ">La solution pour vos envoi en toute sérénité</h3>
 				</article>
 				<figure><img src={{asset('assets/img/pexels-lemonzandtea-1422286.jpg')}} alt=""/></figure>
 			</div>
@@ -38,27 +38,20 @@
 			<div class="blue-section">
 				<article>
 					<h3>Deposez votre annonce</h3>
-					<p>En quelques clics . Remplissez un formulaire detaillé sur le produit que vous souhaitez envoyer et votre
-																																																            annonce est en ligne
-					</p>
+					<p>En quelques clics .<br> Remplissez un formulaire detaillé sur le produit  <br>Votre annonce est en ligne</p>
 					<button type='submit' class='btn btn-primary'>Envoyer un produit</button>
 				</article>
 
 				<article>
-					<h3>Nos transporteur repondent à votre offres</h3>
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam dolore debitis ab rem odit. Expedita
-																																																            aliquid nulla esse, id dignissimos reprehenderit minima doloremque dolor voluptatem fuga deleniti similique,
-																																																            quidem consequuntur?</p>
+					<h3>Vous êtes transporteur</h3>
+					<p>Naviguez entre les annonces <br>Trouvez une opportunité <br>Saisissez la ! </p>
 					<button type='submit' class='btn btn-primary'>En savoir plus</button>
 				</article>
 
 				<article>
 					<h3>Suivez votre livraison</h3>
-					<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rem sit dolorem ut quisquam nisi commodi,
-																																																            deleniti modi sapiente optio neque porro, eum aperiam necessitatibus, delectus assumenda veritatis itaque
-																																																            recusandae in?</p>
+					<p>Bientôt sur ENVOI-TOUT  <br>Suivez vos livraison en temps réel <br>Restez connecté en direct avec votre transporteur</p>
 					<button type='submit' class='btn btn-primary'>En savoir plus
-
 					</button>
 				</article>
 			</div>
@@ -70,23 +63,23 @@
 			</figure>
 
 			<article class="first-section-article">
-				<h2>Déposez vos annonces</h2>
+				<h1>Déposez vos annonces</h1>
 				<ul>
-					<li>Inscrivez-vous</li>
-					<li>Remplissez le formulaire</li>
-					<li>Votre annonce est disponible</li>
+					<li><h3>Inscrivez-vous</h3></li>
+					<li><h3>Remplissez le formulaire</h3></li>
+					<li><h3>Votre annonce est disponible</h3></li>
 				</ul>
 			</article>
 		</section>
 
 		<section class="first-section">
 			<article class="first-section-article">
-				<h2>Un Transporteur postule</h2>
+				<h1>Un Transporteur postule</h1>
 				<ul>
-					<li>Naviguez entre les annonces</li>
-					<li>Trouvez l'annonce qui vous convient</li>
-					<li>Postulez à l'annonce</li>
-					<li>L'expéditeur reçoit votre proposition</li>
+					<li><h3>Naviguez entre les annonces</h3></li>
+					<li><h3>Trouvez l'annonce qui vous convient</h3></li>
+					<li><h3>Postulez à l'annonce</h3></li>
+					<li><h3>L'expéditeur reçoit votre proposition</h3></li>
 				</ul>
 			</article>
 
@@ -97,8 +90,8 @@
 
 		<section class="second-section overflow-hidden d-flex justify-content-around align-items-center flex-wrap">
 			{% for annonce in annonces|slice(0,3) %}
-				<div class='d-inline-flex overflow-hidden'>
-					<div class="card" style="width: 25vw;">
+				<div class='d-inline-flex overflow-hidden' >
+					<div class="card h-100" style="width: 25vw;">
 						<img src={{ vich_uploader_asset(annonce , 'imageFile') }} class="card-img-top height-img " alt="Image de l'annonce">
 						<div class="card-body">
 							<h5 class="card-title">{{annonce.titre}}</h5>
@@ -114,98 +107,32 @@
 
 						</ul>
 						<div class="card-body">
-							<a href="#" class="card-link">Voir l'annonce</a>
+							<a href={{path('app_annonce_show' , {'slug':annonce.slug})}} class="card-link">Voir l'annonce</a>
 							<a href="#" class="card-link">Postuler</a>
 						</div>
 					</div>
 				</div>
 			{% endfor %}
 		</section>
-
-		<section class="third-section overflow-hidden">
-			<div id="carouselExampleAutoplaying" class="carousel slide overflow-hidden" data-bs-ride="carousel">
-				<div class="carousel-inner">
-
-					<div class="carousel-item active">
-						<div class="card text-bg-dark">
-							<img src={{asset("assets/img/caroussel_ecolo.jpg")}} class="card-img" alt="...">
-							<div class="card-img-overlay">
-								<h5 class="card-title">Card title</h5>
-								<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-								<p class="card-text">
-									<small>Last updated 3 mins ago</small>
-								</p>
-							</div>
-						</div> 
-					</div>
-					<div class="carousel-item">
-						<div class="card text-bg-dark">
-							<img src={{asset("assets/img/caroussel_tirelire.jpg")}} class="card-img" alt="...">
-							<div class="card-img-overlay">
-								<h5 class="card-title">Card title</h5>
-								<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-								<p class="card-text">
-									<small>Last updated 3 mins ago</small>
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="carousel-item">
-
-						<div class="card text-bg-dark">
-							<img src={{asset("assets/img/caroussel_route.jpg")}} class="card-img" alt="...">
-							<div class="card-img-overlay">
-								<h5 class="card-title">Card title</h5>
-								<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-								<p class="card-text">
-									<small>Last updated 3 mins ago</small>
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-					<span class="visually-hidden">Previous</span>
-				</button>
-				<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-					<span class="carousel-control-next-icon" aria-hidden="true"></span>
-					<span class="visually-hidden">Next</span>
-				</button>
-			</div>
-		</section>
-
-		<section class="four-section d-flex flex-column justify-content-center align-items-center bg-primary overflow-hidden">
+		<section class="four-section d-flex flex-column justify-content-center align-items-center overflow-hidden">
 			<div class='h-80 w-75 m-auto'>
 				<div class="card rounded-5 bg-dark">
-					<div class="card-body">
-						<h5 class="card-title">Card title</h5>
-						<h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-						<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-						<a href="#" class="card-link">Card link</a>
-						<a href="#" class="card-link">Another link</a>
+					<div class="card-body overflow-hidden">
+						<h5 class="card-title text-white text-center">Vous souhaitez plannifier des livraisons récurrrente c'est bientot disponible</h5>
 					</div>
 				</div>
 			</div>
 			<div class='h-80 w-75 m-auto'>
 				<div class="card rounded-5 bg-dark">
-					<div class="card-body">
-						<h5 class="card-title">Card title</h5>
-						<h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-						<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-						<a href="#" class="card-link">Card link</a>
-						<a href="#" class="card-link">Another link</a>
+					<div class="card-body overflow-hidden">
+						<h5 class="card-title text-white text-center">Le colis que vous souhaitez expédiez nécessite un transporteur particulier ? </h5>
 					</div>
 				</div>
 			</div>
 			<div class='h-80 w-75 m-auto'>
 				<div class="card rounded-5 bg-dark">
-					<div class="card-body">
-						<h5 class="card-title">Card title</h5>
-						<h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-						<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-						<a href="#" class="card-link">Card link</a>
-						<a href="#" class="card-link">Another link</a>
+					<div class="card-body overflow-hidden">
+						<h5 class="card-title text-white text-center">Souscrivez à une assurance pour être serein en cas de problème </h5>
 					</div>
 				</div>
 			</div>
@@ -213,3 +140,4 @@
 
 	</main>
 {% endblock %}
+{# class='d-inline-flex overflow-hidden' #}

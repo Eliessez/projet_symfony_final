@@ -14,7 +14,7 @@ final class Version20241202121210 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return '';
+        return 'Ajout de numéro d\'annonce';
     }
 
     public function up(Schema $schema): void

@@ -114,12 +114,20 @@
 							Mon compte
 						</a>
 						<ul class="dropdown-menu">
+							{% if is_granted('IS_AUTHENTICATED')%}
+							<li>
+								<a class="dropdown-item" href={{path('app_logout')}}>Déconnexion</a>
+							</li>
+							{% else %}
+								
 							<li>
 								<a class="dropdown-item" href={{path('app_login')}}>Connexion</a>
 							</li>
 							<li>
 								<a class="dropdown-item" href={{path('app_register')}}>Inscription</a>
 							</li>
+							{% endif %}
+							
 							<li><hr class="dropdown-divider"></li>
 							<li>
 								<a class="dropdown-item" href={{path('app_front_profil')}}>Mon profil</a>

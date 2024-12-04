@@ -6,9 +6,12 @@ use App\Entity\Annonce;
 use App\Form\AnnonceType;
 use App\Repository\AnnonceRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
@@ -16,18 +19,22 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class AnnonceController extends AbstractController
 {
     #[Route('', name: 'index', methods: ['GET'])]
-    public function index(AnnonceRepository $annonceRepository): Response
+    public function index(AnnonceRepository $annonceRepository , Request $request): Response
     {
+        $pagination = $annonceRepository->paginateAnnonce($request->query->getInt('page',1));
         return $this->render('front/annonce/index.html.twig', [
             'annonces' => $annonceRepository->findAll(),
+            'pagination'=>$pagination
         ]);
     }
 
     #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
-    // #[IsGranted("ROLE_USER")]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    #[IsGranted("ROLE_USER")]
+    public function new(Request $request, EntityManagerInterface $entityManager , Security $security): Response
     {
+        $user = $security->getUser();
         $annonce = new Annonce();
+        $annonce->setUser($user);
         $form = $this->createForm(AnnonceType::class, $annonce);
         $form->handleRequest($request);
 
@@ -45,19 +52,27 @@ class AnnonceController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'show', methods: ['GET'])]
-    public function show(Annonce $annonce): Response
+    #[Route('/{slug}', name: 'show', methods: ['GET'])]
+    public function show($slug, Annonce $annonce, AnnonceRepository $annonceRepository): Response
     {
+        $annonce = $annonceRepository->findOneBy(['slug' => $slug]);
+        if (!$annonce) {
+            throw new NotFoundHttpException('Annonce non trouvée');
+        }
         return $this->render('front/annonce/show.html.twig', [
             'annonce' => $annonce,
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
+    #[Route('/{slug}/edit', name: 'edit', methods: ['GET', 'POST'])]
     #[IsGranted("ROLE_USER")]
 
-    public function edit(Request $request, Annonce $annonce, EntityManagerInterface $entityManager): Response
+    public function edit($slug ,Request $request, Annonce $annonce, EntityManagerInterface $entityManager,AnnonceRepository $annonceRepository): Response
     {
+        $annonce = $annonceRepository->findOneBy(['slug' => $slug]);
+        if (!$annonce) {
+            throw new NotFoundHttpException('Annonce non trouvée');
+        }
         $form = $this->createForm(AnnonceType::class, $annonce);
         $form->handleRequest($request);
 
@@ -75,11 +90,15 @@ class AnnonceController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'delete', methods: ['POST'])]
-    // #[IsGranted("ROLE_USER")]
+    #[Route('/{slug}', name: 'delete', methods: ['POST'])]
+    #[IsGranted("ROLE_USER")]
 
-    public function delete(Request $request, Annonce $annonce, EntityManagerInterface $entityManager): Response
+    public function delete($slug ,Request $request, Annonce $annonce, EntityManagerInterface $entityManager, AnnonceRepository $annonceRepository): Response
     {
+        $annonce = $annonceRepository->findOneBy(['slug' => $slug]);
+        if (!$annonce) {
+            throw new NotFoundHttpException('Annonce non trouvée');
+        }
         if ($this->isCsrfTokenValid('delete'.$annonce->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($annonce);
             $entityManager->flush();

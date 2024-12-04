@@ -10,22 +10,22 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20241005095241 extends AbstractMigration
+final class Version20241203150031 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return 'Ajout de la propriété description';
+        return 'ajout de slug';
     }
 
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE annonce ADD description VARCHAR(255) NOT NULL');
+        $this->addSql('ALTER TABLE annonce ADD slug VARCHAR(255) DEFAULT NULL');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE annonce DROP description');
+        $this->addSql('ALTER TABLE annonce DROP slug');
     }
 }

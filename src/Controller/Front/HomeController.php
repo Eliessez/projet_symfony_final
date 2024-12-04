@@ -44,4 +44,8 @@ class HomeController extends AbstractController
             'form'=>$form
         ]);
     }
+    #[Route('cgu',name:'cgu')]
+    public function index_cgu(){
+        return $this->render('front/home/cgu.html.twig');
+    }
 }

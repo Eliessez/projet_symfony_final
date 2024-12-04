@@ -4,13 +4,13 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Annonce index</h1>
-
-		{% for annonce in annonces %}
-			<div class="card mb-3 " style="max-width: 540px;">
+	<h1>Annonces</h1>
+		<div class="row row-cols-1 row-cols-md-2 g-4">
+		{% for annonce in pagination %}
+			<div class="card mb-3">
 				<div class="row g-0 ">
 					<div class="col-md-4">
-						<img src="{{ vich_uploader_asset(annonce , 'imageFile') }}" class="img-fluid rounded-start" alt="{{ annonce.titre }}">
+						<img src="{{ vich_uploader_asset(annonce , 'imageFile') }}" class="img-fluid w-100 h-100 object-fit-cover rounded-start" alt="{{ annonce.titre }}">
 					</div>
 					<div class="col-md-8">
 						<div class="card-body">
@@ -34,10 +34,10 @@
 									{{ annonce.adresseLivraison }}
 								</small>
 							</p>
-							
-							<a href="{{ path('app_annonce_show', {'id': annonce.id}) }}" class="btn btn-primary btn-sm">Voir</a>
+
+							<a href="{{ path('app_annonce_show', {'slug': annonce.slug}) }}" class="btn btn-primary btn-sm">Voir</a>
 							{% if is_granted('ROLE_SUPER_ADMIN' or app.user == annonce.user) %}
-							<a href="{{ path('app_annonce_edit', {'id': annonce.id}) }}" class="btn btn-secondary btn-sm">Modifier</a>
+							<a href="{{ path('app_annonce_edit', {'slug': annonce.slug}) }}" class="btn btn-secondary btn-sm">Modifier</a>
 							{% endif %}
 						</div>
 					</div>
@@ -46,6 +46,9 @@
 	{% else %}
 		<p>Pas d'annonce disponible</p>
 	{% endfor %}
-
+	</div>
+	{% if is_granted('ROLE_SUPER_ADMIN' or app.user == annonce.user) %}
 	<a href="{{ path('app_annonce_new') }}" class="btn btn-success">Créer une nouvelle annonce</a>
+	{% endif %}
+	{{ knp_pagination_render(pagination) }}
 {% endblock %}

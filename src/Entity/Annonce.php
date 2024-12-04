@@ -77,11 +77,15 @@ class Annonce
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $slug = null;
+
     public function __construct()
     {
         $this->produit = new ArrayCollection();
         $this->transporteur = new ArrayCollection();
         $this->etat_commande = AnnonceStatut::PENDING;
+        
     }
 
     public function getId(): ?int
@@ -322,5 +326,17 @@ class Annonce
         if ($ts === null ) {
             # code...
         }
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): static
+    {
+        $this->slug = $slug;
+
+        return $this;
     }
 }
